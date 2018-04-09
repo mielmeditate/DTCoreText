@@ -448,18 +448,18 @@
 					cleanString = [cleanString stringByAddingHTMLEntities];
 					
 					link = [NSURL URLWithString:cleanString relativeToURL:_baseURL];
-                    if (!link) {
-                        if (@available(iOS 7, *)) {
-                            id encoding = [_options objectForKey:NSCharacterEncodingDocumentAttribute];
-                            if (encoding && [encoding isEqual:@(NSUTF8StringEncoding)]) {
-                                link = [NSURL URLWithString:[cleanString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] relativeToURL:_baseURL];
-                            } else {
-                                link = [NSURL URLWithString:[cleanString stringByURLEncoding]];
-                            }
-                        } else {
-                            link = [NSURL URLWithString:[cleanString stringByURLEncoding]];
-                        }
-                    }
+					if (!link) {
+						if (@available(iOS 7, *)) {
+							id encoding = [_options objectForKey:NSCharacterEncodingDocumentAttribute];
+							if (encoding && [encoding isEqual:@(NSUTF8StringEncoding)]) {
+								link = [NSURL URLWithString:[cleanString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] relativeToURL:_baseURL];
+							} else {
+								link = [NSURL URLWithString:[cleanString stringByURLEncoding] relativeToURL:_baseURL];
+							}
+						} else {
+							link = [NSURL URLWithString:[cleanString stringByURLEncoding] relativeToURL:_baseURL];
+						}
+					}
 				}
 			}
 			else
